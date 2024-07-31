@@ -1,0 +1,18 @@
+<nav id="desktop-nav">
+    <div class="nav-container">
+        <a id="special-nav"href="{{ url_for('index') }}">
+            <div class="logo">
+                <div class="sub-logo">Sentiment Analysis</div>
+                <div class="sub-logo"><img id="emoticon" src="{{ url_for('static', filename='images/emotions.png') }}" alt="Emotions" draggable="false"></div>
+            </div>
+        </a>
+
+        <div>
+            <ul class="nav-links">
+                <li><a class="nav-a" href="{{ url_for('about') }}">About</a></li>
+                <li><a class="nav-a" href="{{ url_for('how') }}">How to Build</a></li>
+                <li><a class="nav-a"  href="https://h-shinde.github.io/Harsh-Shinde/#home">My Website</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

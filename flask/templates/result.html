@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Sentiment Analysis Results {% endblock %}
+
+{% block content %} 
+<div class="data-container">
+    <div class="graphs">
+        <div id="myPlot"></div>
+    </div>
+
+    <div class="graphs">
+        <div id="myPlot1"></div>
+    </div>
+</div>
+
+<script>
+
+     var emotions = {{ data1 | tojson | safe }};
+var data = [{
+    values: [ emotions.positive,emotions.negative], // Use the accessed properties here
+    labels: ['Positive', 'Negative'],
+    type: 'pie',
+    marker: {
+        colors: ['#00FFFF', '#FFA500']
+    }
+}];
+
+var layout = {
+    
+    paper_bgcolor: '#222222'
+};
+
+Plotly.newPlot('myPlot', data, layout);
+// Plotly.newPlot('myPlot1', data, layout);
+</script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+
+{%block title%} Sentiment Analysis {% endblock%}
+
+
+{%block content%} 
+<section id="home">
+        
+        
+    <div class="home-container">
+      
+      
+      <div class="sub-container">
+        <div >
+          <p class="home-text">Find out for your favorite Anime!</p>
+          </div>
+          <div ><form action="/" method="POST" class="ML-input">
+            <input type="text" placeholder="Enter Anime Name!" name="word" id="content" required class="inp">
+            <a href="#rslt" > <input type="submit" value="Submit"  class="inp-btn" ></a> 
+        </form></div>
+        <!-- <div class="ML-input">  <a href="#rslt"> <button class="inp-btn">Submit</button></a> </div> -->
+      </div>
+  
+    </div>
+    <div class="scroll-container">
+      <div class="rslt-container">
+        <div class="rslt">
+            <img src="{{ url_for('static', filename='Images/DemonSlayer.jpg') }}" alt="Demon Slayer">
+            <img src="{{ url_for('static', filename='Images/SoloLeveling.jpg') }}" alt="Solo Leveling">
+            <img src="{{ url_for('static', filename='Images/Naruto.jpg') }}" alt="Naruto">
+            <img src="{{ url_for('static', filename='Images/JJK.jpg') }}" alt="Jiu Jitsu Kaisen">
+            <img src="{{ url_for('static', filename='Images/COE.jpg') }}" alt="Classroom of the Elite">
+    
+          
+          
+        </div>
+      </div>
+      <div class="rslt-container" aria-hidden="true">
+        <div class="rslt">
+            <img src="{{ url_for('static', filename='Images/DemonSlayer.jpg') }}" alt="Demon Slayer">
+            <img src="{{ url_for('static', filename='Images/SoloLeveling.jpg') }}" alt="Solo Leveling">
+            <img src="{{ url_for('static', filename='Images/Naruto.jpg') }}" alt="Naruto">
+            <img src="{{ url_for('static', filename='Images/JJK.jpg') }}" alt="Jiu Jitsu Kaisen">
+            <img src="{{ url_for('static', filename='Images/COE.jpg') }}" alt="Classroom of the Elite">
+          
+        </div>
+      </div>
+    </div>
+   
+    <div class="scroll-container">
+      <div class="rslt-container1">
+        <div class="rslt">
+            <img src="{{ url_for('static', filename='Images/OPM.jpg') }}" alt="One Punch Man">
+            <img src="{{ url_for('static', filename='Images/AOT.jpg') }}" alt="Attack On Titan">
+            <img src="{{ url_for('static', filename='Images/HxH.jpg') }}" alt="Hunter x Hunter">
+            <img src="{{ url_for('static', filename='Images/MHA.jpg') }}" alt="My Hero Academia">
+            <img src="{{ url_for('static', filename='Images/Chainsaw man.jpg') }}" alt="Chainsaw Man">
+
+          
+          
+        </div>
+      </div>
+      <div class="rslt-container1" aria-hidden="true">
+        <div class="rslt">
+            <img src="{{ url_for('static', filename='Images/OPM.jpg') }}" alt="One Punch Man">
+            <img src="{{ url_for('static', filename='Images/AOT.jpg') }}" alt="Attack On Titan">
+            <img src="{{ url_for('static', filename='Images/HxH.jpg') }}" alt="Hunter x Hunter">
+            <img src="{{ url_for('static', filename='Images/MHA.jpg') }}" alt="My Hero Academia">
+            <img src="{{ url_for('static', filename='Images/Chainsaw man.jpg') }}" alt="Chainsaw Man">
+        
+          
+        </div>
+      </div>
+    </div>
+    
+
+   
+
+    </div>
+
+    
+
+  </section>
+
+{% endblock%}
