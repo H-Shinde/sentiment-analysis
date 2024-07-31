@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.linear_model import LogisticRegression
 # Reads file into a pandas DataFrame
-# df = pd.read_csv("test.csv")
+df = pd.read_csv("Data\test.csv")
 
 v = TfidfVectorizer()
 nlp = spacy.load('en_core_web_sm')
@@ -41,43 +41,36 @@ def target_data_toNum(df,column_name):
 
 
 
-# processed_reviews = preprocessing(df, 'text')
+processed_reviews = preprocessing(df, 'text')
+target_data_toNum(df,'sentiment')
+#Get new sentiment column
+y_data = df['sentiment']
+
+
+# Save new text into binary file
+with open('process_reviews','wb')as f:
+    pickle.dump(processed_reviews,f)
+
+with open('new-y_data','wb')as f:
+   pickle.dump(y_data,f)
 
 
 
-
-# with open('process_reviews','wb')as f:
-#     pickle.dump(processed_reviews,f)
-
-
-
-
-# target_data_toNum(df,'sentiment')
-
-
-# y_data = df['sentiment']
-
-
-# with open('new-y_data','wb')as f:
-#    pickle.dump(y_data,f)
-
-
-
-
-
-# Model Training/Feature Extraction
-
-
-with open('mainX','rb') as f:
+#load Data
+with open('Data\mainX','rb') as f:
    mainX = pickle.load(f)
-
-with open('mainY','rb') as f:
+with open('Data\mainY','rb') as f:
    mainY = pickle.load(f)
+
+
+
 main_df = pd.DataFrame({
     'review': mainX,
     'sentiment': mainY
 })
 
+
+#split data into training | testing
 X_train,X_test,y_train,y_test = train_test_split(main_df.review,main_df.sentiment,test_size=.2,random_state=2022,stratify=main_df.sentiment)
 
 X_train = [' '.join(review) for review in X_train]
@@ -85,36 +78,47 @@ X_test = [' '.join(review) for review in X_test]
 
 
 
-# #KNN Classifier
-# v.fit(X_train)
-# clf = Pipeline([('vectorizer_tfidf',v),
-#     ('KNN',KNeighborsClassifier())]
+v.fit(X_train)
+
+#KNN Classifier training
+clfK = Pipeline([('vectorizer_tfidf',v),
+    ('KNN',KNeighborsClassifier())]
    
-# )
-# clf.fit(X_train,y_train)
-# with open('KNN-Model','wb') as f:
-#    pickle.dump(clf,f)
+)
+clfK.fit(X_train,y_train)
 
-
-# #Linear Regression Classifier
-# v.fit(X_train)
-# clf = Pipeline([('vectorizer_tfidf',v),
-#     ('logreg',LogisticRegression())]
+#Linear Regression Classifier
+clfL = Pipeline([('vectorizer_tfidf',v),
+    ('logreg',LogisticRegression())]
    
-# )
-# clf.fit(X_train,y_train)
+)
+clfL.fit(X_train,y_train)
 
-# with open('LinReg-Model','wb') as f:
-#    pickle.dump(clf,f)
+#save models to binary file
+with open('KNN-Model','wb') as f:
+   pickle.dump(clfK,f)
+with open('LinReg-Model','wb') as f:
+   pickle.dump(clfL,f)
 
+
+
+
+#load models
 with open('KNN-Model','rb')as f:
    KNN = pickle.load(f)
 
 with open('LinReg-Model','rb')as f:
    LR = pickle.load(f)
 
-# y_pred_KNN = KNN.predict(X_test)
+y_pred_KNN = KNN.predict(X_test)
 y_pred_LR = LR.predict(X_test)
+
+
+#Check Accuracy
+print(f"Accuracy: {accuracy_score(y_test, y_pred_LR)}")
+print(classification_report(y_test, y_pred_LR))
+
+
 
 print(f"Accuracy: {accuracy_score(y_test, y_pred_LR)}")
 print(classification_report(y_test, y_pred_LR))
