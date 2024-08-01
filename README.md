@@ -11,3 +11,8 @@ MORE DATA ANALYSIS IN PROGRESS...
 
 ## Installation
 MUST INSTALL IN ORDER TO WORK:
+- pandas library: pip install pandas
+- spaCy : pip install spacy
+- scikit-learn : pip install scikit-learn
+- BeautifulSoup : pip install beautifulsoup4 , additionally you need a parser so choose one: pip install lxml or pip install html5lib
+- Flask : pip install Flask
