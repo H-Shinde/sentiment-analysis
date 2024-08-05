@@ -218,17 +218,25 @@ body {
     /* Result Section */
 
   .data-container{
+    margin-top: 4vh;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2rem;
   }
 
-  .graphs{
+  .dscrp,.graphs{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  .dscrp{
+    width: 600px;
+    gap: 1rem;
+  }
+ 
+  
       /* About Section */
 
 

@@ -4,7 +4,14 @@
 
 {% block content %} 
 <div class="data-container">
+    <div class="dscrp">
+<h1>About : </h1>     
+<div>{{data2}}</div>
+    </div>
+
+
     <div class="graphs">
+        <h1>Reviews Classification </h1> 
         <div id="myPlot"></div>
     </div>
 
@@ -15,7 +22,7 @@
 
 <script>
 
-     var emotions = {{ data1 | tojson | safe }};
+var emotions = {{ data1 | tojson | safe }};
 var data = [{
     values: [ emotions.positive,emotions.negative], // Use the accessed properties here
     labels: ['Positive', 'Negative'],

@@ -1,8 +1,7 @@
-import re
 from bs4 import BeautifulSoup
 import requests
 import pickle
-
+import re
 def getEmotions(word):
 
     with open("Models\LinReg-Model",'rb') as f:
@@ -55,5 +54,34 @@ def getEmotions(word):
     return emotions
 
 
-def getStarRating():
-    pass
+def getDescription(word):
+    wrd = word
+
+    url =f"https://myanimelist.net/anime.php?cat=anime&q={wrd}&type=0&score=0&status=0&p=0&r=0&sm=0&sd=0&sy=0&em=0&ed=0&ey=0&c%5B%5D=a&c%5B%5D=b&c%5B%5D=c&c%5B%5D=f"
+
+    anime = requests.get(url).text
+    doc = BeautifulSoup(anime,"html.parser")
+    link_to_anime = doc.find('a',class_="hoverinfo_trigger fw-b fl-l").get('href')
+
+    anime = requests.get(link_to_anime).text
+    doc = BeautifulSoup(anime,"html.parser")
+    description = doc.find(class_="rightside js-scrollfix-bottom-rel").find('table').find('p',itemprop= "description")
+    return description.text
+
+def getStrPlatforms(word):
+    wrd = word
+
+    url =f"https://myanimelist.net/anime.php?cat=anime&q={wrd}&type=0&score=0&status=0&p=0&r=0&sm=0&sd=0&sy=0&em=0&ed=0&ey=0&c%5B%5D=a&c%5B%5D=b&c%5B%5D=c&c%5B%5D=f"
+
+    anime = requests.get(url).text
+    doc = BeautifulSoup(anime,"html.parser")
+    link_to_anime = doc.find('a',class_="hoverinfo_trigger fw-b fl-l").get('href')
+
+    anime = requests.get(link_to_anime).text
+    doc = BeautifulSoup(anime,"html.parser")
+    platforms = doc.find('div',class_='leftside').find('div',class_="pb16 broadcasts").find_all('a',title=re.compile(".*"))
+    titles = [a['title'] for a in platforms if 'title' in a.attrs]
+
+    return titles
+s = getStrPlatforms('demon slayer')
+print(s)
